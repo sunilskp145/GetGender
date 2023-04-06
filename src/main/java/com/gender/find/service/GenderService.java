@@ -11,7 +11,7 @@ import java.util.Collections;
 @Service
 public class GenderService {
     @Value("${Url}")
-    private String youtube_com;
+    private String genderInfo;
 
 public GenderResponse getResponse(String name){
 
@@ -19,8 +19,8 @@ public GenderResponse getResponse(String name){
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
     HttpEntity<String> entity = new HttpEntity<>(headers);
 
-    ResponseEntity<GenderResponse> TaskResponse = new RestTemplate().exchange(youtube_com +name, HttpMethod.GET, entity, GenderResponse.class);
-    GenderResponse genderResponse = TaskResponse.getBody();
+    ResponseEntity<GenderResponse> response = new RestTemplate().exchange(genderInfo +name, HttpMethod.GET, entity, GenderResponse.class);
+    GenderResponse genderResponse = response.getBody();
     System.out.println(genderResponse.getName());
     return genderResponse;
 
